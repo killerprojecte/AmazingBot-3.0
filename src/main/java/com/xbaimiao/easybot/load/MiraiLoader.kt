@@ -22,7 +22,7 @@ object MiraiLoader {
     }
 
     private val libs = ArrayList<Lib>().also {
-        val miraiVersion = "2.6.6"
+        val miraiVersion = "2.7.1-dev-1"
         it.add(Lib("https://maven.aliyun.com/repository/public/org/bouncycastle/bcprov-jdk15on/1.64/bcprov-jdk15on-1.64.jar"))
         it.add(Lib("https://maven.aliyun.com/repository/public/net/mamoe/mirai-core-all/$miraiVersion/mirai-core-all-$miraiVersion-all.jar"))
     }
@@ -37,7 +37,7 @@ object MiraiLoader {
             }
             Loader.addPath(lib.file)
         }
-        EasyBot.INSTANCE.logger.info("EasyBot 所需依赖加载完成")
+        EasyBot.INSTANCE.logger.info("EasyBot 所需依赖加载完成 Support By jim20071128")
     }
 
     class Lib(val url: String) {
