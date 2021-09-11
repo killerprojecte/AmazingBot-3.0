@@ -8,9 +8,10 @@ plugins {
 taboolib {
     // version = "6.0.0-27"
     version = "6.0.1-8"
+}
 
 group = 'com.xbaimiao.easybot'
-version = '3.2.1'
+version = '3.3.1'
 
 tasks.withType(JavaCompile) {
     options.setEncoding("UTF-8")
