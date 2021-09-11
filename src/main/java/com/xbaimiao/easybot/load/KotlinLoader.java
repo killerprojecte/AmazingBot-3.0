@@ -39,11 +39,11 @@ public class KotlinLoader {
         for (Lib lib : libs) {
             if (!lib.getFile().exists()) {
                 if (!lib.getFile().getParentFile().exists() && lib.getFile().getParentFile().mkdirs()) {
-                    EasyBot.INSTANCE.getLogger().info("创建libs文件夹");
+                    System.out.println("loading libs");
                 }
-                EasyBot.INSTANCE.getLogger().info("开始下载 " + lib.getFile().getName());
+                System.out.println("开始下载 " + lib.getFile().getName());
                 if (download(lib.getUrl(), lib.getFile())) {
-                    EasyBot.INSTANCE.getLogger().info(String.format("%s 下载完成", lib.getFile().getName()));
+                    System.out.printf("%s 下载完成", lib.getFile().getName());
                 }
             }
             Loader.addPath(lib.getFile());
