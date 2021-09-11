@@ -37,7 +37,7 @@ object MiraiLoader {
             }
             Loader.addPath(lib.file)
         }
-        EasyBot.INSTANCE.logger.info("EasyBot 所需依赖加载完成 Support By jim20071128")
+        EasyBot.INSTANCE.logger.info("EasyBot 所需依赖加载完成")
     }
 
     class Lib(val url: String) {

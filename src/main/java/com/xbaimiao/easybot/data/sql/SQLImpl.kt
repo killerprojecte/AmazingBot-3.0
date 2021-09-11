@@ -2,6 +2,7 @@ package com.xbaimiao.easybot.data.sql
 
 import com.xbaimiao.easybot.data.DataType
 import com.xbaimiao.easybot.data.UserData
+import com.xbaimiao.easybot.use
 import me.albert.amazingbot.AmazingBot
 import org.bukkit.Bukkit
 import java.util.*
@@ -40,12 +41,14 @@ object SQLImpl : UserData, SQLSource() {
         val offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(uuid))
         val name = offlinePlayer.name
         val result = dataBase.executeQuery(sql)
-        if (result.next()) {
-            sql = "UPDATE $tabName SET uuid='$uuid', name='$name' WHERE qq=$qq;"
-            dataBase.executeUpdate(sql)
-        } else {
-            sql = "INSERT INTO $tabName (qq,uuid,name) VALUES ($qq,'$uuid','$name');"
-            dataBase.executeUpdate(sql)
+        result.use {
+            if (next()){
+                sql = "UPDATE $tabName SET uuid='$uuid', name='$name' WHERE qq=$qq;"
+                dataBase.executeUpdate(sql)
+            } else {
+                sql = "INSERT INTO $tabName (qq,uuid,name) VALUES ($qq,'$uuid','$name');"
+                dataBase.executeUpdate(sql)
+            }
         }
     }
 

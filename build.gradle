@@ -1,13 +1,16 @@
 plugins {
     id 'java'
-    id 'scala'
     id 'org.jetbrains.kotlin.jvm' version '1.5.10'
     id 'com.github.johnrengelman.shadow' version '5.2.0'//使用shadow对依赖进行打包
     id 'maven'
+	id("io.izzel.taboolib") version "1.26"
 }
+taboolib {
+    // version = "6.0.0-27"
+    version = "6.0.1-8"
 
 group = 'com.xbaimiao.easybot'
-version = '3.3'
+version = '3.2.1'
 
 tasks.withType(JavaCompile) {
     options.setEncoding("UTF-8")
@@ -33,7 +36,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly "net.mamoe:mirai-core:2.7.1-dev-1"
+    compileOnly "net.mamoe:mirai-core:2.6.5"
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib"
     compileOnly fileTree(dir: 'libs', includes: ['*.jar'])
     implementation fileTree(dir: 'libs/implementation', includes: ['*.jar'])

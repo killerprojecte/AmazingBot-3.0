@@ -2,6 +2,7 @@ package me.albert.amazingbot.listeners;
 
 import me.albert.amazingbot.AmazingBot;
 import me.albert.amazingbot.events.GroupMessageEvent;
+import me.albert.amazingbot.events.PrivateMessageEvent;
 import me.albert.amazingbot.utils.ConsoleSender;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
@@ -50,6 +51,29 @@ public class OnCommand implements Listener {
             Bukkit.getScheduler().runTask(AmazingBot.getInstance(), () -> Bukkit.dispatchCommand(sender, cmd));
             String log = AmazingBot.getInstance().getConfig().getString("messages.log_command")
                     .replace("%user%", String.valueOf(e.getUserID())).replace("%cmd%", cmd)
+                    .replace("&", "§");
+            Bukkit.getLogger().info(log);
+        });
+    }
+
+    /**
+     * 私聊执行命令
+     */
+    @EventHandler
+    public void onCommand(PrivateMessageEvent event) {
+        if (!isAdmin(event.getUserID())) {
+            return;
+        }
+        if (!event.getMsg().startsWith("cmd ")) {
+            return;
+        }
+        event.response("命令已提交");
+        Bukkit.getScheduler().runTaskAsynchronously(AmazingBot.getInstance(), () -> {
+            String cmd = event.getMsg().substring(4);
+            ConsoleSender sender = new ConsoleSender(Bukkit.getServer(), event);
+            Bukkit.getScheduler().runTask(AmazingBot.getInstance(), () -> Bukkit.dispatchCommand(sender, cmd));
+            String log = AmazingBot.getInstance().getConfig().getString("messages.log_command")
+                    .replace("%user%", String.valueOf(event.getUserID())).replace("%cmd%", cmd)
                     .replace("&", "§");
             Bukkit.getLogger().info(log);
         });

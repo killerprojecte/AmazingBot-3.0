@@ -1,7 +1,10 @@
 package me.albert.amazingbot.utils;
 
 import me.albert.amazingbot.AmazingBot;
+import me.albert.amazingbot.events.ABEvent;
 import me.albert.amazingbot.events.GroupMessageEvent;
+import me.albert.amazingbot.events.PrivateMessageEvent;
+import net.mamoe.mirai.event.Event;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
@@ -23,10 +26,10 @@ public class ConsoleSender implements ConsoleCommandSender {
 
     private static int taskid;
     private final Server server;
-    private final GroupMessageEvent e;
+    private final ABEvent e;
     private final ArrayList<String> output = new ArrayList<>();
 
-    public ConsoleSender(Server server, GroupMessageEvent e) {
+    public ConsoleSender(Server server, ABEvent e) {
         this.server = server;
         this.e = e;
     }
@@ -36,9 +39,18 @@ public class ConsoleSender implements ConsoleCommandSender {
         taskid = Bukkit.getScheduler().runTaskLaterAsynchronously(AmazingBot.getInstance(), () -> {
             StringBuilder output = new StringBuilder();
             for (String s : this.output) {
-                output.append(s.replaceAll("§\\S", "")).append("\n");
+                output.append(s.replaceAll("§\\S", ""));
+                if (output.indexOf(s) != output.length() - 1) {
+                    output.append("\n");
+                }
             }
-            e.response(output.toString());
+            if (e instanceof GroupMessageEvent) {
+                ((GroupMessageEvent) e).response(output.toString());
+            } else if (e instanceof PrivateMessageEvent) {
+                ((PrivateMessageEvent) e).response(output.toString());
+            } else {
+                System.out.println(output);
+            }
             this.output.clear();
         }, 4).getTaskId();
     }
