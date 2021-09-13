@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.xbaimiao.easybot'
-version = '3.3.0'
+version = '3.2.1'
 
 tasks.withType(JavaCompile) {
     options.setEncoding("UTF-8")
@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly "net.mamoe:mirai-core:2.7.1-dev-1"
+    compileOnly "net.mamoe:mirai-core:2.6.5"
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib"
     compileOnly fileTree(dir: 'libs', includes: ['*.jar'])
     implementation fileTree(dir: 'libs/implementation', includes: ['*.jar'])

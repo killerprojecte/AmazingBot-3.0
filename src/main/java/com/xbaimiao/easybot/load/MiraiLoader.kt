@@ -22,7 +22,7 @@ object MiraiLoader {
     }
 
     private val libs = ArrayList<Lib>().also {
-        val miraiVersion = "2.7.1-dev-1"
+        val miraiVersion = "2.7.0"
         it.add(Lib("https://maven.aliyun.com/repository/public/org/bouncycastle/bcprov-jdk15on/1.64/bcprov-jdk15on-1.64.jar"))
         it.add(Lib("https://maven.aliyun.com/repository/public/net/mamoe/mirai-core-all/$miraiVersion/mirai-core-all-$miraiVersion-all.jar"))
     }
