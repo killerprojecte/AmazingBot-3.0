@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.5.10'
     id 'com.github.johnrengelman.shadow' version '5.2.0'//使用shadow对依赖进行打包
     id 'maven'
-	id("io.izzel.taboolib") version "1.26"
+    id("io.izzel.taboolib") version "1.26"
 }
 taboolib {
     // version = "6.0.0-27"
